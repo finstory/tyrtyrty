@@ -162,13 +162,13 @@ function passport(minAge, country) {
   if (minAge < 18) return false;
   let cache = [];
   return function isAllowed(array) {
-      for (let i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.length; i++) {
 
-          if (array[i].age >= minAge && country === array[i].allowed.find(element => element === country))
-              cache.push(array[i]);
-      }
-      if (cache.length == 0) return false;
-      else return cache;
+      if (array[i].age >= minAge && country === array[i].allowed.find(element => element === country))
+        cache.push(array[i]);
+    }
+    if (cache.length == 0) return false;
+    else return cache;
   }
 }
 
@@ -181,8 +181,8 @@ function countDeep(arr) {
   let amount = 1;
   const search = (arr) => {
     for (let i = 0; i < arr.length; i++) {
-      if(typeof arr[i] === "object")
-      amount++;
+      if (typeof arr[i] === "object")
+        amount++;
       search(arr[i]);
     }
   }
@@ -210,7 +210,19 @@ function countDeep(arr) {
 //  - Caso que devuelve false --> isAncestor(genealogyTree, "Jacqueline Bouvier", "Abigail Simpson")
 //  [Observar los tests para otros casos]
 var isAncestor = function (genealogyTree, ancestor, descendant) {
-  // Tu código aca:
+  let listAncestor = [];
+  const search = (descendant) => {
+      for (const i in genealogyTree) {
+          for (let j = 0; j < genealogyTree[i].length; j++) {
+              if (genealogyTree[i][j] === descendant) {
+                  listAncestor.push(i);
+                  search(i);
+              }
+          }
+      }
+  }
+  search(descendant);
+  return (ancestor === listAncestor.find(element => element === ancestor));
 };
 
 // ---- Queue ----
@@ -270,8 +282,17 @@ function cardGame(playerOneCards, playerTwoCards) {
 //   {name: 'Joaquin', age: 25, height: 1.85},
 //   {name: 'Dylan', age: 30, height: 1.75},
 // ]
-function specialSort(array, swapFunction) {
-  // Tu código aca:
+function specialSort(arr, swapFunction) {
+  for (let i = 0; i < arr.length - 1; i++) {
+    for (let j = 0; j < arr.length - 1 - i; j++) {
+      if (swapFunction(arr[j], arr[j + 1]) === -1) {
+        let aux = arr[j]
+        arr[j] = arr[j + 1]
+        arr[j + 1] = aux;
+      }
+    }
+  }
+  return arr;
 }
 
 module.exports = {
