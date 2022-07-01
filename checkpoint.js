@@ -283,6 +283,7 @@ function cardGame(playerOneCards, playerTwoCards) {
 //   {name: 'Dylan', age: 30, height: 1.75},
 // ]
 function specialSort(arr, swapFunction) {
+  
   for (let i = 0; i < arr.length - 1; i++) {
     for (let j = 0; j < arr.length - 1 - i; j++) {
       if (swapFunction(arr[j], arr[j + 1]) === -1) {
